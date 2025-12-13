@@ -62,8 +62,8 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Button variant="default" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Get Started
+            <Button asChild variant="glow">
+              <Link to="/contact">Get Started</Link>
             </Button>
           </div>
 
@@ -97,8 +97,8 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
-              Get Started
+            <Button asChild variant="glow" className="w-full mt-4">
+              <Link to="/contact">Get Started</Link>
             </Button>
           </div>
         </div>
