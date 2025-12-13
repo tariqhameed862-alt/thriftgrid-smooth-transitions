@@ -44,7 +44,6 @@ export function PageTransition({ children }: PageTransitionProps) {
         animate="enter"
         exit="exit"
         variants={pageVariants}
-        className="min-h-screen"
       >
         {children}
       </motion.div>
