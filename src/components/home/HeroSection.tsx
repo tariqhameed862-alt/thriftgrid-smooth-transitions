@@ -53,19 +53,20 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
+              variant="gradient"
+              className="group px-10"
             >
               <Link to="/contact">
                 Start Your Project
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </Button>
             <Button
-              variant="outline"
+              variant="glass"
               size="lg"
-              className="group px-8 py-6 text-lg rounded-full border-border hover:border-primary hover:bg-primary/5 transition-all duration-300"
+              className="group px-10"
             >
-              <Play className="mr-2 h-5 w-5 fill-current" />
+              <Play className="mr-2 h-5 w-5 fill-current transition-transform duration-300 group-hover:scale-110" />
               Watch Demo
             </Button>
           </div>
