@@ -1,27 +1,39 @@
 import { ArrowRight, Sparkles, Rocket, Shield, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with Parallax */}
+      <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         <img
           src={heroBg}
           alt="Abstract technology background"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/80" />
-      </div>
+      </motion.div>
 
-      {/* Animated Gradient Mesh */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Animated Gradient Mesh with Parallax */}
+      <motion.div className="absolute inset-0 overflow-hidden" style={{ y: backgroundY }}>
         <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-gradient-to-br from-secondary/15 to-transparent rounded-full blur-3xl animate-float" style={{ animationDelay: '-3s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-accent/10 to-transparent rounded-full blur-3xl animate-pulse-slow" />
-      </div>
+      </motion.div>
 
       {/* Subtle Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -29,10 +41,18 @@ export function HeroSection() {
         backgroundSize: '80px 80px'
       }} />
 
-      <div className="container mx-auto px-6 relative z-10 pt-24">
+      <motion.div 
+        className="container mx-auto px-6 relative z-10 pt-24"
+        style={{ y: textY, opacity }}
+      >
         <div className="max-w-5xl mx-auto text-center">
           {/* Trust Badge */}
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-10 animate-fade-in">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm mb-10"
+          >
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-foreground">
               Trusted by 500+ Companies Worldwide
@@ -42,10 +62,15 @@ export function HeroSection() {
                 <div key={i} className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-secondary border-2 border-background" />
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-8 animate-slide-up tracking-tight">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-8 tracking-tight"
+          >
             Build the Future with{" "}
             <span className="relative">
               <span className="gradient-text">Next-Gen</span>
@@ -54,16 +79,26 @@ export function HeroSection() {
               </svg>
             </span>
             {" "}Technology
-          </h1>
+          </motion.h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 animate-slide-up leading-relaxed" style={{ animationDelay: '0.15s' }}>
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+          >
             We partner with ambitious startups and enterprises to design, build, and scale 
             digital products that users love and businesses depend on.
-          </p>
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          >
             <Button
               asChild
               size="lg"
@@ -86,10 +121,15 @@ export function HeroSection() {
                 View Our Work
               </Link>
             </Button>
-          </div>
+          </motion.div>
 
           {/* Feature Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.45s' }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-wrap items-center justify-center gap-4"
+          >
             {[
               { icon: Shield, text: "Enterprise Security" },
               { icon: Zap, text: "Lightning Fast" },
@@ -103,11 +143,16 @@ export function HeroSection() {
                 <span className="text-sm font-medium text-foreground">{feature.text}</span>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Stats Row */}
-        <div className="max-w-4xl mx-auto mt-24 animate-slide-up" style={{ animationDelay: '0.6s' }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-4xl mx-auto mt-24"
+        >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 p-8 rounded-2xl bg-card/40 border border-border/30 backdrop-blur-xl">
             {[
               { value: "150+", label: "Projects Delivered" },
@@ -123,15 +168,20 @@ export function HeroSection() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+      >
         <div className="w-6 h-10 rounded-full border-2 border-border/40 flex items-start justify-center p-2">
           <div className="w-1 h-2 rounded-full bg-primary" />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
