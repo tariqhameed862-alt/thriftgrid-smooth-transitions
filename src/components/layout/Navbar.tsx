@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -30,47 +30,51 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "glass shadow-lg py-3"
-          : "bg-transparent py-5"
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/50 py-4"
+          : "bg-transparent py-6"
       }`}
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           <Link
             to="/"
-            className="text-2xl font-display font-bold gradient-text transition-transform hover:scale-105"
+            className="text-2xl font-display font-bold text-foreground transition-colors hover:text-primary"
           >
             ThriftGrid
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative text-sm font-medium transition-all duration-300 hover:text-primary ${
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                   location.pathname === link.path
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                } after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
-                  location.pathname === link.path ? "after:w-full" : ""
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="glow">
-              <Link to="/contact">Get Started</Link>
+          </div>
+
+          <div className="hidden md:block">
+            <Button asChild variant="gradient" size="sm" className="group">
+              <Link to="/contact">
+                Get Started
+                <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+            className="md:hidden p-2 text-foreground hover:text-primary transition-colors rounded-lg hover:bg-muted/50"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -78,28 +82,29 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            isOpen ? "max-h-96 opacity-100 mt-6" : "max-h-0 opacity-0"
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? "max-h-[400px] opacity-100 mt-4" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="glass rounded-xl p-6 space-y-4">
-            {navLinks.map((link, index) => (
+          <div className="p-4 rounded-xl bg-card border border-border/50 space-y-1">
+            {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`block py-2 text-lg font-medium transition-all duration-300 hover:text-primary hover:translate-x-2 ${
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
                   location.pathname === link.path
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="glow" className="w-full mt-4">
-              <Link to="/contact">Get Started</Link>
-            </Button>
+            <div className="pt-2">
+              <Button asChild variant="gradient" className="w-full">
+                <Link to="/contact">Get Started</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

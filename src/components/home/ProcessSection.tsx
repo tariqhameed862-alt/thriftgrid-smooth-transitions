@@ -1,86 +1,81 @@
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { MessageSquare, Lightbulb, Code2, Rocket, CheckCircle } from "lucide-react";
+import { Search, Lightbulb, Code2, Rocket } from "lucide-react";
 
 const steps = [
   {
     number: "01",
-    icon: MessageSquare,
+    icon: Search,
     title: "Discovery",
-    description: "We start by understanding your vision, goals, and challenges through in-depth consultations.",
+    description: "We dive deep into your vision, goals, and challenges through strategic consultations.",
   },
   {
     number: "02",
     icon: Lightbulb,
-    title: "Strategy & Planning",
-    description: "Our team crafts a comprehensive roadmap with clear milestones and deliverables.",
+    title: "Strategy",
+    description: "Our team crafts a comprehensive roadmap with clear milestones and success metrics.",
   },
   {
     number: "03",
     icon: Code2,
-    title: "Design & Development",
+    title: "Development",
     description: "We bring your vision to life with cutting-edge technology and beautiful design.",
   },
   {
     number: "04",
     icon: Rocket,
-    title: "Launch & Scale",
-    description: "We deploy your solution and provide ongoing support to ensure continued success.",
+    title: "Launch",
+    description: "We deploy your solution and provide ongoing support for continued growth.",
   },
 ];
 
 export function ProcessSection() {
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
+    <section className="py-28 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/20 to-transparent" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <AnimatedSection className="text-center mb-16">
-          <span className="text-sm font-medium text-primary uppercase tracking-wider">
-            Our Process
-          </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
-            How We <span className="gradient-text">Work</span>
+        <AnimatedSection className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+            <span className="text-xs font-semibold text-primary uppercase tracking-wider">Process</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            How We <span className="gradient-text">Deliver</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            A proven methodology that delivers exceptional results every time.
+            A proven methodology that transforms ideas into successful digital products.
           </p>
         </AnimatedSection>
 
-        <div className="relative">
-          {/* Connection Line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-border to-transparent -translate-y-1/2" />
+        <div className="relative max-w-5xl mx-auto">
+          {/* Timeline Line */}
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-border -translate-y-1/2" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
             {steps.map((step, index) => (
               <AnimatedSection
                 key={step.number}
                 animation="fade-up"
-                delay={index * 150}
+                delay={index * 120}
               >
-                <div className="group relative text-center">
-                  {/* Step Number Background */}
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-8xl font-display font-bold text-muted/30 select-none transition-all duration-500 group-hover:text-primary/20">
+                <div className="group relative flex flex-col items-center text-center">
+                  {/* Step Number */}
+                  <div className="absolute -top-8 text-7xl font-display font-bold text-muted/20 select-none group-hover:text-primary/15 transition-colors duration-500">
                     {step.number}
                   </div>
 
-                  {/* Icon */}
-                  <div className="relative z-10 mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg shadow-primary/20">
-                    <step.icon className="w-10 h-10 text-card" />
+                  {/* Icon Circle */}
+                  <div className="relative z-10 w-16 h-16 rounded-2xl bg-card border border-border/50 flex items-center justify-center mb-6 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-lg group-hover:shadow-primary/10">
+                    <step.icon className="w-7 h-7 text-primary" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-display font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-lg font-display font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
                     {step.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {step.description}
                   </p>
-
-                  {/* Checkmark */}
-                  <div className="mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                    <CheckCircle className="w-6 h-6 text-primary mx-auto" />
-                  </div>
                 </div>
               </AnimatedSection>
             ))}
