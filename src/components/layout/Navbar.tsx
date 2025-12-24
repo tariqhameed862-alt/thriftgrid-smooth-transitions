@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -62,7 +63,8 @@ export function Navbar() {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <Button asChild variant="gradient" size="sm" className="group">
               <Link to="/contact">
                 Get Started
@@ -100,8 +102,9 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <div className="pt-2">
-              <Button asChild variant="gradient" className="w-full">
+            <div className="pt-2 flex items-center gap-3">
+              <ThemeToggle />
+              <Button asChild variant="gradient" className="flex-1">
                 <Link to="/contact">Get Started</Link>
               </Button>
             </div>
