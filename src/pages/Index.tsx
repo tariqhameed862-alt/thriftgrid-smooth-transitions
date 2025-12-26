@@ -11,6 +11,8 @@ import { Testimonials } from "@/components/home/Testimonials";
 import { FAQSection } from "@/components/home/FAQSection";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
 import { CTASection } from "@/components/home/CTASection";
+import { LampSection } from "@/components/ui/LampSection";
+import { TimelineSection } from "@/components/home/TimelineSection";
 
 const Index = () => {
   return (
@@ -18,9 +20,14 @@ const Index = () => {
       <HeroSection />
       <ClientsSection />
       <ServicesPreview />
+      <LampSection 
+        title="Building the Future"
+        subtitle="We craft digital experiences that push boundaries and deliver exceptional results for forward-thinking brands."
+      />
       <ProcessSection />
       <FeaturedWork />
       <StatsSection />
+      <TimelineSection />
       <TechStackSection />
       <PricingSection />
       <Testimonials />
